@@ -29,7 +29,7 @@ export class TimeProgressRow extends HTMLElement {
     if (!this.shadowRoot) return;
 
     const dotsHtml = Array.from({ length: DOTS }, (_, i) => {
-      const on = i < filled ? " dot--on" : "";
+      const on = i < filled ? " dot-on" : "";
       return `<span class="dot${on}" aria-hidden="true"></span>`;
     }).join("");
 

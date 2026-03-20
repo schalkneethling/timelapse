@@ -6,9 +6,14 @@
   "scripts": {
     "dev": "vp dev",
     "build": "vp build",
-    "preview": "vp preview"
+    "preview": "vp preview",
+    "check": "vp check && stylelint \"src/**/*.css\"",
+    "check:fix": "stylelint \"src/**/*.css\" --fix && vp check --fix"
   },
   "devDependencies": {
+    "stylelint": "^17.5.0",
+    "stylelint-config-standard": "^40.0.0",
+    "stylelint-order": "^8.1.1",
     "vite": "npm:@voidzero-dev/vite-plus-core@latest",
     "vite-plugin-pwa": "^1.2.0",
     "vite-plus": "latest",

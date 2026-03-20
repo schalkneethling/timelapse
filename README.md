@@ -12,11 +12,13 @@ Built with **[Vite+](https://viteplus.dev)** (Vite toolchain), **vanilla web com
 
 ## Scripts
 
-| Command        | Description      |
-| -------------- | ---------------- |
-| `pnpm dev`     | Start dev server |
-| `pnpm build`   | Production build |
-| `pnpm preview` | Preview `dist`   |
+| Command          | Description                                                        |
+| ---------------- | ------------------------------------------------------------------ |
+| `pnpm dev`       | Start dev server                                                   |
+| `pnpm build`     | Production build                                                   |
+| `pnpm preview`   | Preview `dist`                                                     |
+| `pnpm check`     | **Vite+** (`vp check`): JS/TS lint + formatter + **Stylelint** CSS |
+| `pnpm check:fix` | Auto-fix CSS property order (Stylelint) then `vp check --fix`      |
 
 ## Development
 
