@@ -1,0 +1,56 @@
+:root {
+  color-scheme: dark;
+
+  --font-matrix: "Doto", "Share Tech Mono", ui-monospace, monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  background: #05060a;
+  color: #f8fafc;
+  font-family: var(--font-matrix);
+  margin: 0;
+  min-height: 100%;
+}
+
+.skip-link {
+  background: #fff;
+  color: #05060a;
+  font-size: 0.85rem;
+  left: -9999px;
+  letter-spacing: 0.06em;
+  padding: 0.65rem 1rem;
+  position: absolute;
+  text-decoration: none;
+  text-transform: uppercase;
+  z-index: 1000;
+}
+
+.skip-link:focus {
+  left: 0.75rem;
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+  top: 0.75rem;
+}
+
+#app {
+  min-height: 100dvh;
+}
+
+#main-panel:focus {
+  outline: none;
+}
+
+#main-panel:focus-visible {
+  outline: 2px solid rgb(255 255 255 / 35%);
+  outline-offset: 4px;
+}

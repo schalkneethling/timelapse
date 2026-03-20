@@ -1,0 +1,288 @@
+time-dashboard-app {
+  display: block;
+
+  --card: rgb(8 10 14 / 92%);
+  --card-edge: rgb(255 255 255 / 8%);
+  --font-matrix: "Doto", "Share Tech Mono", ui-monospace, monospace;
+  --glow: rgb(255 255 255 / 4%);
+  --text: #f8fafc;
+}
+
+time-dashboard-board {
+  display: block;
+}
+
+.shell {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-block-size: 100dvb;
+  padding: clamp(1rem, 4vi, 2.5rem);
+  position: relative;
+}
+
+.bg {
+  background:
+    radial-gradient(120% 80% at 20% 0%, #ff5c3d 0%, transparent 55%),
+    radial-gradient(100% 90% at 80% 10%, #7c3aed 0%, transparent 50%),
+    radial-gradient(90% 70% at 50% 100%, #2563eb 0%, transparent 45%),
+    linear-gradient(165deg, #0b1020 0%, #05060a 100%);
+  filter: saturate(1.15);
+  inset: 0;
+  position: fixed;
+  z-index: -2;
+}
+
+.bg::after {
+  backdrop-filter: blur(2.625rem) saturate(1.2);
+  content: "";
+  inset: 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.top {
+  align-items: flex-start;
+  display: flex;
+  gap: 1rem;
+  inline-size: min(40rem, 100%);
+  justify-content: space-between;
+  margin-block-end: 1rem;
+}
+
+.title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.title {
+  color: var(--text);
+  font-family: var(--font-matrix);
+  font-size: clamp(0.85rem, 2.4vi, 1rem);
+  letter-spacing: 0.14em;
+  margin: 0;
+  text-shadow: 0 0 1.125rem rgb(255 255 255 / 12%);
+  text-transform: uppercase;
+}
+
+.sub {
+  color: rgb(248 250 252 / 55%);
+  font-family: var(--font-matrix);
+  font-size: clamp(0.62rem, 1.6vi, 0.72rem);
+  letter-spacing: 0.08em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.settings-btn {
+  background: rgb(255 255 255 / 6%);
+  border: 0.0625rem solid var(--card-edge);
+  border-radius: 100rem;
+  color: var(--text);
+  cursor: pointer;
+  flex-shrink: 0;
+  font-family: var(--font-matrix);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  padding-block: 0.55rem;
+  padding-inline: 1rem;
+  text-transform: uppercase;
+  transition:
+    background 200ms ease,
+    border-color 200ms ease,
+    transform 150ms ease;
+}
+
+.settings-btn:hover {
+  background: rgb(255 255 255 / 10%);
+  border-color: rgb(255 255 255 / 18%);
+}
+
+.settings-btn:focus-visible {
+  outline: 0.125rem solid #fff;
+  outline-offset: 0.1875rem;
+}
+
+.settings-btn:active {
+  transform: scale(0.98);
+}
+
+.card {
+  backdrop-filter: blur(0.5rem);
+  background: var(--card);
+  border: 0.0625rem solid var(--card-edge);
+  border-radius: 1.35rem;
+  box-shadow:
+    0 1.5rem 5rem rgb(0 0 0 / 55%),
+    inset 0 0.0625rem 0 var(--glow);
+  inline-size: min(40rem, 100%);
+  padding-block: clamp(1rem, 3vi, 1.75rem);
+  padding-inline: clamp(1rem, 3vi, 1.85rem);
+}
+
+.rows-host {
+  display: flex;
+  flex-direction: column;
+}
+
+.status {
+  color: rgb(248 250 252 / 45%);
+  font-family: var(--font-matrix);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  margin-block: 1rem 0;
+  margin-inline: 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+dialog.settings {
+  background: #0a0c10;
+  border: 0.0625rem solid rgb(255 255 255 / 12%);
+  border-radius: 1rem;
+  box-shadow: 0 1.5rem 6.25rem rgb(0 0 0 / 65%);
+  color: var(--text);
+  inline-size: min(26.25rem, calc(100dvi - 2rem));
+  max-block-size: min(90dvb, 40rem);
+  padding: 0;
+}
+
+dialog.settings::backdrop {
+  backdrop-filter: blur(0.25rem);
+  background: rgb(0 0 0 / 55%);
+}
+
+.drawer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-block-size: min(90dvb, 40rem);
+  overflow: auto;
+  padding-block: 1.25rem 1.5rem;
+  padding-inline: 1.35rem;
+}
+
+.drawer-head {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+}
+
+.drawer-title {
+  font-family: var(--font-matrix);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.close-btn {
+  background: rgb(255 255 255 / 5%);
+  border: 0.0625rem solid rgb(255 255 255 / 15%);
+  border-radius: 0.5rem;
+  color: var(--text);
+  cursor: pointer;
+  font-family: var(--font-matrix);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  padding-block: 0.4rem;
+  padding-inline: 0.65rem;
+  text-transform: uppercase;
+}
+
+.close-btn:focus-visible {
+  outline: 0.125rem solid #fff;
+  outline-offset: 0.125rem;
+}
+
+#drawer-save {
+  margin-block-start: 0.25rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.field-label {
+  color: rgb(248 250 252 / 65%);
+  font-family: var(--font-matrix);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.select-wrap select,
+.tz-filter {
+  background: rgb(255 255 255 / 4%);
+  border: 0.0625rem solid rgb(255 255 255 / 12%);
+  border-radius: 0.5rem;
+  color: var(--text);
+  font-family: var(--font-matrix);
+  font-size: 0.72rem;
+  inline-size: 100%;
+  padding-block: 0.5rem;
+  padding-inline: 0.6rem;
+}
+
+.tz-filter {
+  margin-block-end: 0.35rem;
+}
+
+.select-wrap select:focus-visible,
+.tz-filter:focus-visible {
+  outline: 0.125rem solid #fff;
+  outline-offset: 0.125rem;
+}
+
+fieldset.widgets {
+  border: 0.0625rem solid rgb(255 255 255 / 10%);
+  border-radius: 0.65rem;
+  margin: 0;
+  padding-block: 0.75rem 1rem;
+  padding-inline: 1rem;
+}
+
+fieldset.widgets legend {
+  color: rgb(248 250 252 / 75%);
+  font-family: var(--font-matrix);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  padding-block: 0;
+  padding-inline: 0.35rem;
+  text-transform: uppercase;
+}
+
+.check {
+  align-items: center;
+  display: flex;
+  font-family: var(--font-matrix);
+  font-size: 0.72rem;
+  gap: 0.5rem;
+  letter-spacing: 0.04em;
+  margin-block-start: 0.45rem;
+}
+
+.check input {
+  accent-color: #fff;
+  block-size: 1rem;
+  inline-size: 1rem;
+}
+
+.check-hint {
+  margin-block-start: 0.15rem;
+  margin-inline-start: 1.45rem;
+}
+
+.hint {
+  color: rgb(248 250 252 / 45%);
+  font-family: var(--font-matrix);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  line-height: 1.45;
+  margin: 0;
+}
