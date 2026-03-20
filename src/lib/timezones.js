@@ -1,3 +1,5 @@
+// @ts-check
+
 /** @returns {string[]} */
 export function listTimeZones() {
   if (typeof Intl !== "undefined" && "supportedValuesOf" in Intl) {

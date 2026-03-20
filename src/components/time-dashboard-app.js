@@ -1,6 +1,9 @@
+// @ts-check
 import appCss from "./time-dashboard-app.css?inline";
 import "./time-progress-row.js";
 import { computeWidget, WIDGET_KEYS, getDefaultTimeZone } from "../lib/time-calculations.js";
+
+/** @typedef {import("../lib/time-calculations.js").WidgetKey} WidgetKey */
 import {
   defaultSettings,
   loadSettings,
@@ -9,6 +12,7 @@ import {
 } from "../lib/settings-storage.js";
 import { listTimeZones } from "../lib/timezones.js";
 
+/** @type {Record<WidgetKey, { id: string; title: string; hint: string }>} */
 const WIDGET_META = {
   day: { id: "day", title: "Day", hint: "Progress through the current calendar day." },
   week: {
@@ -50,7 +54,9 @@ export class TimeDashboardApp extends HTMLElement {
 
   renderStatic() {
     const tz = resolvedTimeZone(this._settings);
-    this.shadowRoot.innerHTML = `
+    const root = this.shadowRoot;
+    if (!root) return;
+    root.innerHTML = `
       <style>${appCss}</style>
       <div class="bg" aria-hidden="true"></div>
       <div class="shell">
@@ -103,18 +109,22 @@ export class TimeDashboardApp extends HTMLElement {
     `;
   }
 
-  /** @returns {HTMLElement | null} */
+  /**
+   * @param {string} id
+   * @returns {HTMLElement | null}
+   */
   $id(id) {
-    return this.shadowRoot.getElementById(id);
+    return this.shadowRoot?.getElementById(id) ?? null;
   }
 
   bindDrawer() {
-    const dialog = /** @type {HTMLDialogElement} */ (this.$id("settings-dialog"));
-    const openBtn = /** @type {HTMLButtonElement} */ (this.$id("open-settings"));
-    const saveBtn = /** @type {HTMLButtonElement} */ (this.$id("drawer-save"));
-    const cancelBtn = /** @type {HTMLButtonElement} */ (this.$id("drawer-cancel"));
-    const tzSelect = /** @type {HTMLSelectElement} */ (this.$id("tz-select"));
-    const tzFilter = /** @type {HTMLInputElement} */ (this.$id("tz-filter"));
+    const dialog = /** @type {HTMLDialogElement | null} */ (this.$id("settings-dialog"));
+    const openBtn = /** @type {HTMLButtonElement | null} */ (this.$id("open-settings"));
+    const saveBtn = /** @type {HTMLButtonElement | null} */ (this.$id("drawer-save"));
+    const cancelBtn = /** @type {HTMLButtonElement | null} */ (this.$id("drawer-cancel"));
+    const tzSelect = /** @type {HTMLSelectElement | null} */ (this.$id("tz-select"));
+    const tzFilter = /** @type {HTMLInputElement | null} */ (this.$id("tz-filter"));
+    if (!dialog || !openBtn || !saveBtn || !cancelBtn || !tzSelect || !tzFilter) return;
 
     openBtn.addEventListener("click", () => {
       this._settings = loadSettings();
@@ -167,6 +177,9 @@ export class TimeDashboardApp extends HTMLElement {
     this.populateZoneSelect("");
   }
 
+  /**
+   * @param {string} filter
+   */
   populateZoneSelect(filter) {
     const sel = /** @type {HTMLSelectElement} */ (this.$id("tz-select"));
     const q = filter.toLowerCase();
@@ -263,6 +276,9 @@ export class TimeDashboardApp extends HTMLElement {
   }
 }
 
+/**
+ * @param {WidgetKey} key
+ */
 function widgetCheckbox(key) {
   const m = WIDGET_META[key];
   return `
@@ -284,11 +300,13 @@ function groupByRegion(zones) {
   for (const z of zones) {
     const region = z.includes("/") ? z.slice(0, z.indexOf("/")) : "General";
     if (!m.has(region)) m.set(region, []);
-    m.get(region).push(z);
+    const list = m.get(region);
+    if (list) list.push(z);
   }
   return [...m.entries()].sort((a, b) => a[0].localeCompare(b[0]));
 }
 
+/** @param {string} s */
 function escapeHtml(s) {
   return s
     .replaceAll("&", "&amp;")

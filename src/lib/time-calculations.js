@@ -1,8 +1,14 @@
+// @ts-check
 /**
  * Wall-clock math in IANA time zones using Intl (no extra deps).
  */
 
 /** @typedef {{ year: number; month: number; day: number; hour: number; minute: number; second: number }} WallParts */
+
+/**
+ * Keys used for visible period widgets.
+ * @typedef {"day"|"week"|"month"|"quarter"|"year"} WidgetKey
+ */
 
 /**
  * @param {number} epochMs
@@ -43,6 +49,7 @@ export function getWallParts(epochMs, timeZone) {
  * @returns {number}
  */
 function cmpWall(a, b) {
+  /** @type {(keyof WallParts)[]} */
   const keys = ["year", "month", "day", "hour", "minute", "second"];
   for (const k of keys) {
     if (a[k] !== b[k]) return a[k] < b[k] ? -1 : 1;
@@ -52,7 +59,7 @@ function cmpWall(a, b) {
 
 /**
  * UTC epoch ms for a wall time in `timeZone`.
- * @param {Omit<WallParts, "hour" | "minute" | "second"> & Partial<Pick<WallParts, "hour" | "minute" | "second">>} w
+ * @param {{ year: number; month: number; day: number; hour?: number; minute?: number; second?: number }} w
  * @param {string} timeZone
  */
 export function wallTimeToUtcMs(w, timeZone) {
@@ -102,7 +109,7 @@ export function isoWeekCalendar(y, m, d) {
   date.setUTCDate(date.getUTCDate() + 4 - (date.getUTCDay() || 7));
   const isoYear = date.getUTCFullYear();
   const yearStart = new Date(Date.UTC(isoYear, 0, 1));
-  const week = Math.ceil(((date - yearStart) / 86400000 + 1) / 7);
+  const week = Math.ceil(((date.getTime() - yearStart.getTime()) / 86400000 + 1) / 7);
   return { isoYear, week };
 }
 
@@ -123,9 +130,7 @@ export function mondayOfIsoWeek(isoYear, week) {
   );
 }
 
-/**
- * @param {string} timeZone
- */
+/** @returns {string} */
 export function getDefaultTimeZone() {
   try {
     return Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
@@ -278,6 +283,7 @@ export const WIDGET_KEYS = ["day", "week", "month", "quarter", "year"];
  * @param {string} key
  * @param {number} nowMs
  * @param {string} timeZone
+ * @returns {{ label: string; percent: number; week?: number; live: string }}
  */
 export function computeWidget(key, nowMs, timeZone) {
   switch (key) {

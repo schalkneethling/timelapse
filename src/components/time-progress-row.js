@@ -1,3 +1,4 @@
+// @ts-check
 import rowCss from "./time-progress-row.css?inline";
 
 const DOTS = 40;
@@ -57,6 +58,7 @@ export class TimeProgressRow extends HTMLElement {
   }
 }
 
+/** @param {string} s */
 function escapeHtml(s) {
   return s
     .replaceAll("&", "&amp;")
@@ -65,6 +67,7 @@ function escapeHtml(s) {
     .replaceAll('"', "&quot;");
 }
 
+/** @param {string} s */
 function escapeAttr(s) {
   return escapeHtml(s).replaceAll("'", "&#39;");
 }

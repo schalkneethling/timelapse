@@ -14,22 +14,25 @@ importers:
     devDependencies:
       stylelint:
         specifier: ^17.5.0
-        version: 17.5.0
+        version: 17.5.0(typescript@5.9.3)
       stylelint-config-standard:
         specifier: ^40.0.0
-        version: 40.0.0(stylelint@17.5.0)
+        version: 40.0.0(stylelint@17.5.0(typescript@5.9.3))
       stylelint-order:
         specifier: ^8.1.1
-        version: 8.1.1(stylelint@17.5.0)
+        version: 8.1.1(stylelint@17.5.0(typescript@5.9.3))
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
       vite:
         specifier: npm:@voidzero-dev/vite-plus-core@latest
-        version: '@voidzero-dev/vite-plus-core@0.1.13(terser@5.46.1)'
+        version: '@voidzero-dev/vite-plus-core@0.1.13(terser@5.46.1)(typescript@5.9.3)'
       vite-plugin-pwa:
         specifier: ^1.2.0
-        version: 1.2.0(@voidzero-dev/vite-plus-core@0.1.13(terser@5.46.1))(workbox-build@7.4.0)(workbox-window@7.4.0)
+        version: 1.2.0(@voidzero-dev/vite-plus-core@0.1.13(terser@5.46.1)(typescript@5.9.3))(workbox-build@7.4.0)(workbox-window@7.4.0)
       vite-plus:
         specifier: latest
-        version: 0.1.13(@voidzero-dev/vite-plus-core@0.1.13(terser@5.46.1))(terser@5.46.1)
+        version: 0.1.13(@voidzero-dev/vite-plus-core@0.1.13(terser@5.46.1)(typescript@5.9.3))(terser@5.46.1)(typescript@5.9.3)
       workbox-window:
         specifier: ^7.4.0
         version: 7.4.0
@@ -2360,6 +2363,11 @@ packages:
     resolution: {integrity: sha512-3KS2b+kL7fsuk/eJZ7EQdnEmQoaho/r6KUef7hxvltNA5DR8NAUM+8wJMbJyZ4G9/7i3v5zPBIMN5aybAh2/Jg==}
     engines: {node: '>= 0.4'}
 
+  typescript@5.9.3:
+    resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+
   unbox-primitive@1.1.0:
     resolution: {integrity: sha512-nWJ91DjeOkej/TA8pXQ3myruKpKEYgqvpw9lz4OPHj/NWFNluYrjbz9j01CJ8yKQd2g4jFoOkINCTW2I5LEEyw==}
     engines: {node: '>= 0.4'}
@@ -3482,7 +3490,7 @@ snapshots:
 
   '@types/trusted-types@2.0.7': {}
 
-  '@voidzero-dev/vite-plus-core@0.1.13(terser@5.46.1)':
+  '@voidzero-dev/vite-plus-core@0.1.13(terser@5.46.1)(typescript@5.9.3)':
     dependencies:
       '@oxc-project/runtime': 0.120.0
       '@oxc-project/types': 0.120.0
@@ -3491,6 +3499,7 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
       terser: 5.46.1
+      typescript: 5.9.3
 
   '@voidzero-dev/vite-plus-darwin-arm64@0.1.13':
     optional: true
@@ -3504,11 +3513,11 @@ snapshots:
   '@voidzero-dev/vite-plus-linux-x64-gnu@0.1.13':
     optional: true
 
-  '@voidzero-dev/vite-plus-test@0.1.13(@voidzero-dev/vite-plus-core@0.1.13(terser@5.46.1))(terser@5.46.1)':
+  '@voidzero-dev/vite-plus-test@0.1.13(@voidzero-dev/vite-plus-core@0.1.13(terser@5.46.1)(typescript@5.9.3))(terser@5.46.1)(typescript@5.9.3)':
     dependencies:
       '@standard-schema/spec': 1.1.0
       '@types/chai': 5.2.3
-      '@voidzero-dev/vite-plus-core': 0.1.13(terser@5.46.1)
+      '@voidzero-dev/vite-plus-core': 0.1.13(terser@5.46.1)(typescript@5.9.3)
       es-module-lexer: 1.7.0
       obug: 2.1.1
       pixelmatch: 7.1.0
@@ -3518,7 +3527,7 @@ snapshots:
       tinybench: 2.9.0
       tinyexec: 1.0.4
       tinyglobby: 0.2.15
-      vite: '@voidzero-dev/vite-plus-core@0.1.13(terser@5.46.1)'
+      vite: '@voidzero-dev/vite-plus-core@0.1.13(terser@5.46.1)(typescript@5.9.3)'
       ws: 8.19.0
     transitivePeerDependencies:
       - '@arethetypeswrong/core'
@@ -3696,12 +3705,14 @@ snapshots:
     dependencies:
       browserslist: 4.28.1
 
-  cosmiconfig@9.0.1:
+  cosmiconfig@9.0.1(typescript@5.9.3):
     dependencies:
       env-paths: 2.2.1
       import-fresh: 3.3.1
       js-yaml: 4.1.1
       parse-json: 5.2.0
+    optionalDependencies:
+      typescript: 5.9.3
 
   cross-spawn@7.0.6:
     dependencies:
@@ -4744,22 +4755,22 @@ snapshots:
 
   strip-comments@2.0.1: {}
 
-  stylelint-config-recommended@18.0.0(stylelint@17.5.0):
+  stylelint-config-recommended@18.0.0(stylelint@17.5.0(typescript@5.9.3)):
     dependencies:
-      stylelint: 17.5.0
+      stylelint: 17.5.0(typescript@5.9.3)
 
-  stylelint-config-standard@40.0.0(stylelint@17.5.0):
+  stylelint-config-standard@40.0.0(stylelint@17.5.0(typescript@5.9.3)):
     dependencies:
-      stylelint: 17.5.0
-      stylelint-config-recommended: 18.0.0(stylelint@17.5.0)
+      stylelint: 17.5.0(typescript@5.9.3)
+      stylelint-config-recommended: 18.0.0(stylelint@17.5.0(typescript@5.9.3))
 
-  stylelint-order@8.1.1(stylelint@17.5.0):
+  stylelint-order@8.1.1(stylelint@17.5.0(typescript@5.9.3)):
     dependencies:
       postcss: 8.5.8
       postcss-sorting: 10.0.0(postcss@8.5.8)
-      stylelint: 17.5.0
+      stylelint: 17.5.0(typescript@5.9.3)
 
-  stylelint@17.5.0:
+  stylelint@17.5.0(typescript@5.9.3):
     dependencies:
       '@csstools/css-calc': 3.1.1(@csstools/css-parser-algorithms@4.0.0(@csstools/css-tokenizer@4.0.0))(@csstools/css-tokenizer@4.0.0)
       '@csstools/css-parser-algorithms': 4.0.0(@csstools/css-tokenizer@4.0.0)
@@ -4769,7 +4780,7 @@ snapshots:
       '@csstools/selector-resolve-nested': 4.0.0(postcss-selector-parser@7.1.1)
       '@csstools/selector-specificity': 6.0.0(postcss-selector-parser@7.1.1)
       colord: 2.9.3
-      cosmiconfig: 9.0.1
+      cosmiconfig: 9.0.1(typescript@5.9.3)
       css-functions-list: 3.3.3
       css-tree: 3.2.1
       debug: 4.4.3
@@ -4893,6 +4904,8 @@ snapshots:
       possible-typed-array-names: 1.1.0
       reflect.getprototypeof: 1.0.10
 
+  typescript@5.9.3: {}
+
   unbox-primitive@1.1.0:
     dependencies:
       call-bound: 1.0.4
@@ -4929,22 +4942,22 @@ snapshots:
 
   util-deprecate@1.0.2: {}
 
-  vite-plugin-pwa@1.2.0(@voidzero-dev/vite-plus-core@0.1.13(terser@5.46.1))(workbox-build@7.4.0)(workbox-window@7.4.0):
+  vite-plugin-pwa@1.2.0(@voidzero-dev/vite-plus-core@0.1.13(terser@5.46.1)(typescript@5.9.3))(workbox-build@7.4.0)(workbox-window@7.4.0):
     dependencies:
       debug: 4.4.3
       pretty-bytes: 6.1.1
       tinyglobby: 0.2.15
-      vite: '@voidzero-dev/vite-plus-core@0.1.13(terser@5.46.1)'
+      vite: '@voidzero-dev/vite-plus-core@0.1.13(terser@5.46.1)(typescript@5.9.3)'
       workbox-build: 7.4.0
       workbox-window: 7.4.0
     transitivePeerDependencies:
       - supports-color
 
-  vite-plus@0.1.13(@voidzero-dev/vite-plus-core@0.1.13(terser@5.46.1))(terser@5.46.1):
+  vite-plus@0.1.13(@voidzero-dev/vite-plus-core@0.1.13(terser@5.46.1)(typescript@5.9.3))(terser@5.46.1)(typescript@5.9.3):
     dependencies:
       '@oxc-project/types': 0.120.0
-      '@voidzero-dev/vite-plus-core': 0.1.13(terser@5.46.1)
-      '@voidzero-dev/vite-plus-test': 0.1.13(@voidzero-dev/vite-plus-core@0.1.13(terser@5.46.1))(terser@5.46.1)
+      '@voidzero-dev/vite-plus-core': 0.1.13(terser@5.46.1)(typescript@5.9.3)
+      '@voidzero-dev/vite-plus-test': 0.1.13(@voidzero-dev/vite-plus-core@0.1.13(terser@5.46.1)(typescript@5.9.3))(terser@5.46.1)(typescript@5.9.3)
       cac: 7.0.0
       cross-spawn: 7.0.6
       oxfmt: 0.41.0
