@@ -7,14 +7,15 @@ const STORAGE_KEY = "there-is-still-time:v1";
 
 /**
  * Persisted app preferences.
- * @typedef {{ widgets: WidgetKey[]; timezone: string | null }} AppSettings
+ * @typedef {{ widgets: WidgetKey[]; timezone: string | null; maximized?: boolean }} AppSettings
  */
 
 /** @returns {AppSettings} */
 export function defaultSettings() {
   return {
-    widgets: [...WIDGET_KEYS],
+    maximized: false,
     timezone: null,
+    widgets: [...WIDGET_KEYS],
   };
 }
 
@@ -23,7 +24,7 @@ export function loadSettings() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return defaultSettings();
-    /** @type {{ widgets?: unknown; timezone?: unknown }} */
+    /** @type {{ widgets?: unknown; timezone?: unknown; maximized?: unknown }} */
     const data = JSON.parse(raw);
     const rawWidgets = data.widgets;
     const widgets = Array.isArray(rawWidgets)
@@ -35,8 +36,9 @@ export function loadSettings() {
     const timezone =
       typeof data.timezone === "string" && data.timezone.length > 0 ? data.timezone : null;
     return {
-      widgets: widgets.length ? widgets : [...WIDGET_KEYS],
+      maximized: data.maximized === true,
       timezone,
+      widgets: widgets.length ? widgets : [...WIDGET_KEYS],
     };
   } catch {
     return defaultSettings();

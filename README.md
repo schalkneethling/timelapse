@@ -4,6 +4,14 @@ A progressive web app that shows how much of the **current day, week (ISO, with 
 
 Built with **[Vite+](https://viteplus.dev)** (Vite toolchain), **[Lit](https://lit.dev)** web components (**Light DOM**), HTML, CSS, and JavaScript.
 
+## Inspiration
+
+The look and feel are inspired by **[Finite Nothing](https://playground.nothing.tech/detail/app/Ym0wYycapdPGCUPJ)** on [Nothing Tech’s Playground](https://playground.nothing.tech/).
+
+## Accessibility
+
+Palette and borders aim for **WCAG 2.2 AA**: primary and secondary text colors are chosen for at least **4.5:1** contrast on the page and card backgrounds; focus rings and control outlines target **3:1** non-text contrast where applicable.
+
 ## Features
 
 - Live-updating rows with dot progress bars and numeric percentages

@@ -11,8 +11,8 @@ export default defineConfig({
         short_name: "Still time",
         description:
           "See how much of the day, week, month, quarter, and year has elapsed — with configurable widgets and time zones.",
-        theme_color: "#0b1020",
-        background_color: "#05060a",
+        theme_color: "#131722",
+        background_color: "#131722",
         display: "standalone",
         start_url: "/",
         icons: [
