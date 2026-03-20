@@ -1,7 +1,18 @@
 // @ts-check
 import { WIDGET_KEYS, getDefaultTimeZone } from "./time-calculations.js";
 
-const STORAGE_KEY = "there-is-still-time:v1";
+const STORAGE_KEY = "timelapse:v1";
+const LEGACY_STORAGE_KEY = "there-is-still-time:v1";
+
+/** Migrate saved settings from the previous app key (one-time). */
+function migrateLegacyStorage() {
+  if (localStorage.getItem(STORAGE_KEY)) return;
+  const legacy = localStorage.getItem(LEGACY_STORAGE_KEY);
+  if (legacy) {
+    localStorage.setItem(STORAGE_KEY, legacy);
+    localStorage.removeItem(LEGACY_STORAGE_KEY);
+  }
+}
 
 /** @typedef {import("./time-calculations.js").WidgetKey} WidgetKey */
 
@@ -21,6 +32,7 @@ export function defaultSettings() {
 
 /** @returns {AppSettings} */
 export function loadSettings() {
+  migrateLegacyStorage();
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return defaultSettings();
@@ -48,6 +60,7 @@ export function loadSettings() {
 /** @param {AppSettings} s */
 export function saveSettings(s) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+  localStorage.removeItem(LEGACY_STORAGE_KEY);
 }
 
 /**

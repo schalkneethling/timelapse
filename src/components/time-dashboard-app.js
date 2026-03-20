@@ -80,7 +80,7 @@ export class TimeDashboardApp extends LitElement {
       <div class="shell">
         <div class="top">
           <div class="title-block">
-            <h1 class="title" id="app-heading">There is still time</h1>
+            <h1 class="title" id="app-heading">Timelapse</h1>
             <p class="sub" id="tz-line">${tzLine}</p>
           </div>
           <div class="top-actions" role="group" aria-label="View options">
@@ -113,7 +113,7 @@ export class TimeDashboardApp extends LitElement {
             href="https://playground.nothing.tech/detail/app/Ym0wYycapdPGCUPJ"
             target="_blank"
             rel="noopener noreferrer"
-            >Finite Nothing</a>
+            >Finite by Srizan</a>
           (Nothing Tech).
         </p>
       </div>

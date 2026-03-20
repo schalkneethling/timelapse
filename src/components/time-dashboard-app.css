@@ -1,6 +1,33 @@
 time-dashboard-app {
   display: block;
 
+  /* Per-row bar tints (soft “light”, low saturation) */
+  --bar-day-dot-glow: rgb(200 220 255 / 22%);
+  --bar-day-dot-inset: rgb(200 220 255 / 28%);
+  --bar-day-dot-on: #dfe9f7;
+  --bar-day-empty: rgb(200 218 245 / 16%);
+  --bar-day-ring: rgb(190 210 240 / 12%);
+  --bar-month-dot-glow: rgb(150 230 205 / 18%);
+  --bar-month-dot-inset: rgb(140 220 195 / 26%);
+  --bar-month-dot-on: #dff5ee;
+  --bar-month-empty: rgb(130 210 185 / 14%);
+  --bar-month-ring: rgb(120 200 175 / 11%);
+  --bar-quarter-dot-glow: rgb(255 210 185 / 20%);
+  --bar-quarter-dot-inset: rgb(255 200 175 / 28%);
+  --bar-quarter-dot-on: #fbeee4;
+  --bar-quarter-empty: rgb(235 195 175 / 14%);
+  --bar-quarter-ring: rgb(225 185 165 / 11%);
+  --bar-week-dot-glow: rgb(210 200 255 / 20%);
+  --bar-week-dot-inset: rgb(210 200 255 / 26%);
+  --bar-week-dot-on: #ebe6fa;
+  --bar-week-empty: rgb(200 195 235 / 15%);
+  --bar-week-ring: rgb(195 188 230 / 12%);
+  --bar-year-dot-glow: rgb(255 225 160 / 20%);
+  --bar-year-dot-inset: rgb(255 215 140 / 28%);
+  --bar-year-dot-on: #fbf3d9;
+  --bar-year-empty: rgb(235 210 165 / 14%);
+  --bar-year-ring: rgb(225 200 150 / 11%);
+
   /* WCAG 2.2 AA: body text ≥4.5:1 vs #131722 & vs composite card (~#090b10); borders ≥3:1 for UI. */
   --border-muted: rgb(255 255 255 / 24%);
   --border-strong: rgb(255 255 255 / 34%);
@@ -23,12 +50,30 @@ time-dashboard-board {
 
 .shell {
   align-items: center;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  inline-size: min(40rem, 100%);
   justify-content: center;
+  max-inline-size: min(40rem, 100%);
   min-block-size: 100dvb;
-  padding: clamp(1rem, 4vi, 2.5rem);
+  padding-block: clamp(1rem, 4vi, 2.5rem);
+  padding-inline: clamp(1rem, 4vi, 2.5rem);
   position: relative;
+  transition:
+    block-size 320ms cubic-bezier(0.4, 0, 0.2, 1),
+    inline-size 320ms cubic-bezier(0.4, 0, 0.2, 1),
+    max-block-size 320ms cubic-bezier(0.4, 0, 0.2, 1),
+    max-inline-size 320ms cubic-bezier(0.4, 0, 0.2, 1),
+    min-block-size 320ms cubic-bezier(0.4, 0, 0.2, 1),
+    padding-block 320ms cubic-bezier(0.4, 0, 0.2, 1),
+    padding-inline 320ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shell {
+    transition-duration: 0.01ms;
+  }
 }
 
 .bg {
@@ -344,13 +389,13 @@ time-dashboard-app.maximized .rows-host {
 }
 
 time-dashboard-app.maximized .shell {
-  block-size: 80dvb;
+  block-size: 94dvb;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  inline-size: 80dvi;
-  max-block-size: 80dvb;
-  max-inline-size: 80dvi;
+  inline-size: 94dvi;
+  max-block-size: 94dvb;
+  max-inline-size: 94dvi;
   min-block-size: 0;
 }
 
@@ -368,4 +413,26 @@ time-dashboard-app.maximized time-dashboard-board {
 
 time-dashboard-app.maximized .credit {
   max-inline-size: 100%;
+}
+
+@media (width <= 40rem) {
+  .top {
+    align-items: center;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .title-block {
+    align-items: center;
+    text-align: center;
+  }
+
+  .sub {
+    max-inline-size: 100%;
+  }
+
+  .top-actions {
+    inline-size: 100%;
+    justify-content: center;
+  }
 }

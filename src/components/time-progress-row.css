@@ -32,6 +32,46 @@ time-progress-row {
   border-bottom: none;
 }
 
+.row[data-kind="day"] {
+  --dot-empty: var(--bar-day-empty);
+  --dot-on: var(--bar-day-dot-on);
+  --dot-on-glow: var(--bar-day-dot-glow);
+  --dot-on-inset: var(--bar-day-dot-inset);
+  --dot-ring: var(--bar-day-ring);
+}
+
+.row[data-kind="month"] {
+  --dot-empty: var(--bar-month-empty);
+  --dot-on: var(--bar-month-dot-on);
+  --dot-on-glow: var(--bar-month-dot-glow);
+  --dot-on-inset: var(--bar-month-dot-inset);
+  --dot-ring: var(--bar-month-ring);
+}
+
+.row[data-kind="quarter"] {
+  --dot-empty: var(--bar-quarter-empty);
+  --dot-on: var(--bar-quarter-dot-on);
+  --dot-on-glow: var(--bar-quarter-dot-glow);
+  --dot-on-inset: var(--bar-quarter-dot-inset);
+  --dot-ring: var(--bar-quarter-ring);
+}
+
+.row[data-kind="week"] {
+  --dot-empty: var(--bar-week-empty);
+  --dot-on: var(--bar-week-dot-on);
+  --dot-on-glow: var(--bar-week-dot-glow);
+  --dot-on-inset: var(--bar-week-dot-inset);
+  --dot-ring: var(--bar-week-ring);
+}
+
+.row[data-kind="year"] {
+  --dot-empty: var(--bar-year-empty);
+  --dot-on: var(--bar-year-dot-on);
+  --dot-on-glow: var(--bar-year-dot-glow);
+  --dot-on-inset: var(--bar-year-dot-inset);
+  --dot-ring: var(--bar-year-ring);
+}
+
 .label {
   color: var(--text, #f8fafc);
   font-family: var(--font-matrix, monospace);
@@ -66,8 +106,8 @@ time-progress-row {
 .dot-on {
   background: var(--dot-on, #fff);
   box-shadow:
-    0 0 0.625rem rgb(255 255 255 / 35%),
-    inset 0 0 0 0.0625rem rgb(255 255 255 / 20%);
+    0 0 0.625rem var(--dot-on-glow, rgb(255 255 255 / 35%)),
+    inset 0 0 0 0.0625rem var(--dot-on-inset, rgb(255 255 255 / 20%));
 }
 
 .pct {
