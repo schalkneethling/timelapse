@@ -31,10 +31,6 @@ Implemented today (via **[vite-plugin-pwa](https://vite-pwa-org.netlify.app/)** 
 
 Not implemented: push notifications, background sync, share targets, or a custom in-app “install” banner.
 
-## Social sharing
-
-`index.html` includes **Open Graph** and **Twitter / X** (`summary_large_image`) meta tags. The preview image path is **`/timelapse-social-share.png`** — add that file under **`public/`** after you merge (recommended **1200×630** PNG). Crawlers resolve relative image URLs against the page URL; if you deploy under a subpath, set `base` in Vite and use the same path prefix for `og:image` / `twitter:image`, or switch those tags to an absolute production URL (and optional `og:url`).
-
 ## Scripts
 
 | Command          | Description                                                         |
