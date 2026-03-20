@@ -113,7 +113,7 @@ export class TimeDashboardApp extends LitElement {
             href="https://playground.nothing.tech/detail/app/Ym0wYycapdPGCUPJ"
             target="_blank"
             rel="noopener noreferrer"
-            >Finite Nothing</a>
+            >Finite by Srizan</a>
           (Nothing Tech).
         </p>
       </div>
@@ -164,34 +164,33 @@ export class TimeDashboardApp extends LitElement {
                 <option value="">
                   Device default (${getDefaultTimeZone().replace(/_/g, " ")})
                 </option>
-                ${
-                  currentTz && !matches.includes(currentTz)
-                    ? html`<option value=${currentTz}>
+                ${currentTz && !matches.includes(currentTz)
+        ? html`<option value=${currentTz}>
                       ${currentTz.replace(/_/g, " ")} (filtered)
                     </option>`
-                    : nothing
-                }
+        : nothing
+      }
                 ${grouped.map(
-                  ([region, zones]) => html`
+        ([region, zones]) => html`
                     <optgroup label=${region}>
                       ${zones.map((z) => html`<option value=${z}>${z.replace(/_/g, " ")}</option>`)}
                     </optgroup>
                   `,
-                )}
+      )}
               </select>
             </div>
             <p class="hint" id="tz-hint">
               Empty selection uses your device time zone (${getDefaultTimeZone().replace(
-                /_/g,
-                " ",
-              )}).
+        /_/g,
+        " ",
+      )}).
             </p>
           </div>
           <fieldset class="widgets">
             <legend>Visible widgets</legend>
             ${WIDGET_KEYS.map((k) => {
-              const m = WIDGET_META[k];
-              return html`
+        const m = WIDGET_META[k];
+        return html`
                 <label class="check">
                   <input
                     type="checkbox"
@@ -204,7 +203,7 @@ export class TimeDashboardApp extends LitElement {
                 </label>
                 <p class="check-hint hint">${m.hint}</p>
               `;
-            })}
+      })}
           </fieldset>
           <button type="button" class="settings-btn" id="drawer-save" @click=${this._onSaveClick}>
             Save &amp; close

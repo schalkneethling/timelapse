@@ -6,7 +6,7 @@ Built with **[Vite+](https://viteplus.dev)** (Vite toolchain), **[Lit](https://l
 
 ## Inspiration
 
-The look and feel are inspired by **[Finite Nothing](https://playground.nothing.tech/detail/app/Ym0wYycapdPGCUPJ)** on [Nothing Tech’s Playground](https://playground.nothing.tech/).
+The basic idea, look and feel are inspired by **[Finite by Srizan](https://playground.nothing.tech/detail/app/Ym0wYycapdPGCUPJ)** on [Nothing Tech’s Playground](https://playground.nothing.tech/).
 
 ## Accessibility
 
