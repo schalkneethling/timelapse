@@ -414,3 +414,25 @@ time-dashboard-app.maximized time-dashboard-board {
 time-dashboard-app.maximized .credit {
   max-inline-size: 100%;
 }
+
+@media (width <= 40rem) {
+  .top {
+    align-items: center;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .title-block {
+    align-items: center;
+    text-align: center;
+  }
+
+  .sub {
+    max-inline-size: 100%;
+  }
+
+  .top-actions {
+    inline-size: 100%;
+    justify-content: center;
+  }
+}
