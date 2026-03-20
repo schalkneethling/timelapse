@@ -1,6 +1,6 @@
-# There is still time
+# Timelapse
 
-A progressive web app that shows how much of the **current day, week (ISO, with week number), month, quarter, and year** has elapsed — as percentages with a retro dot-matrix style board.
+**Timelapse** is a progressive web app that shows how much of the **current day, week (ISO, with week number), month, quarter, and year** has elapsed — as percentages with a retro dot-matrix style board.
 
 Built with **[Vite+](https://viteplus.dev)** (Vite toolchain), **[Lit](https://lit.dev)** web components (**Light DOM**), HTML, CSS, and JavaScript.
 
@@ -10,7 +10,7 @@ The look and feel are inspired by **[Finite Nothing](https://playground.nothing.
 
 ## Accessibility
 
-Palette and borders aim for **WCAG 2.2 AA**: primary and secondary text colors are chosen for at least **4.5:1** contrast on the page and card backgrounds; focus rings and control outlines target **3:1** non-text contrast where applicable.
+Palette and borders aim for **WCAG 2.2 AA**: primary and secondary text colors are chosen for at least **4.5:1** contrast on the page and card backgrounds; focus rings and control outlines target **3:1** non-text contrast where applicable. Layout transitions honor **`prefers-reduced-motion`**.
 
 ## Features
 

@@ -32,7 +32,7 @@ export class TimeProgressRow extends LitElement {
     const indices = Array.from({ length: DOTS }, (_, i) => i);
 
     return html`
-      <div class="row" role="group" aria-describedby="${rowId}-live">
+      <div class="row" data-kind=${this.kind} role="group" aria-describedby="${rowId}-live">
         <p class="label" id="${rowId}-label">${this.label}</p>
         <div class="bar-wrap">
           <div

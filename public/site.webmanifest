@@ -1,7 +1,7 @@
 {
   "name": "Timelapse",
   "short_name": "Timelapse",
-  "description": "There is still time — progress through the day, week, month, quarter, and year.",
+  "description": "Timelapse — progress through the day, week, month, quarter, and year.",
   "start_url": "/",
   "scope": "/",
   "icons": [
