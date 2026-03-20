@@ -18,6 +18,19 @@ Palette and borders aim for **WCAG 2.2 AA**: primary and secondary text colors a
 - **Settings** dialog: toggle which periods appear; pick a **time zone** (or use the device default). All interval math uses the selected IANA zone
 - **Accessibility**: skip link, semantic structure, `role="progressbar"` with `aria-valuenow`, descriptive `aria-live` text per row, keyboard-friendly native `<dialog>` (Tab / Escape)
 
+## Progressive Web App (PWA)
+
+Implemented today (via **[vite-plugin-pwa](https://vite-pwa-org.netlify.app/)** / Workbox **`generateSW`**):
+
+- **Web app manifest** — `public/site.webmanifest` (linked from `index.html`): name, `start_url`, `scope`, `display: standalone`, icons, theme/background colors (supports installability where the browser allows it).
+- **Service worker registration** — `registerSW` from `virtual:pwa-register` with **`registerType: "autoUpdate"`** and **`immediate: true`**.
+- **Precaching** — shell assets (`index.html`, JS/CSS bundles) plus static files listed in `includeAssets` (favicons, manifest, PWA PNGs).
+- **Navigation fallback** — document navigations are served **`index.html`** so client routing still works when offline or on hard refresh (SPA-style).
+- **Activation** — **`skipWaiting`** and **`clientsClaim`** so a new worker can take over promptly.
+- **Cache cleanup** — **`cleanupOutdatedCaches`** removes stale precache entries after updates.
+
+Not implemented: push notifications, background sync, share targets, or a custom in-app “install” banner.
+
 ## Scripts
 
 | Command          | Description                                                         |
@@ -36,4 +49,4 @@ pnpm install
 pnpm dev
 ```
 
-The service worker is generated in production builds (`pnpm build`); in dev, PWA registration still runs but caching behavior differs.
+Production builds emit the service worker above. With `pnpm dev`, registration and caching can differ from `pnpm build` / `pnpm preview`.
