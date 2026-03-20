@@ -2,6 +2,7 @@
   color-scheme: dark;
 
   --font-matrix: "Doto", "Share Tech Mono", ui-monospace, monospace;
+  --page-bg: #131722;
 }
 
 *,
@@ -15,7 +16,7 @@ html {
 }
 
 body {
-  background: #05060a;
+  background: var(--page-bg);
   color: #f8fafc;
   font-family: var(--font-matrix);
   margin: 0;

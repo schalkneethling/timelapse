@@ -57,6 +57,16 @@ export class TimeDashboardApp extends LitElement {
     this._settings = loadSettings();
   }
 
+  /**
+   * @param {import('lit').PropertyValues} changed
+   */
+  willUpdate(changed) {
+    super.willUpdate(changed);
+    if (changed.has("_settings")) {
+      this.classList.toggle("maximized", Boolean(this._settings.maximized));
+    }
+  }
+
   render() {
     const tz = resolvedTimeZone(this._settings);
     const tzLine = `Time zone · ${tz.replace(/_/g, " ")}${this._settings.timezone ? "" : " (device)"}`;
@@ -73,17 +83,28 @@ export class TimeDashboardApp extends LitElement {
             <h1 class="title" id="app-heading">There is still time</h1>
             <p class="sub" id="tz-line">${tzLine}</p>
           </div>
-          <button
-            type="button"
-            class="settings-btn"
-            id="open-settings"
-            aria-haspopup="dialog"
-            aria-controls="settings-dialog"
-            ${ref(this._openBtnRef)}
-            @click=${this._onOpenSettings}
-          >
-            Settings
-          </button>
+          <div class="top-actions" role="group" aria-label="View options">
+            <button
+              type="button"
+              class="settings-btn"
+              id="toggle-maximize"
+              aria-pressed=${this._settings.maximized ? "true" : "false"}
+              @click=${this._onToggleMaximize}
+            >
+              ${this._settings.maximized ? "Default size" : "Larger view"}
+            </button>
+            <button
+              type="button"
+              class="settings-btn"
+              id="open-settings"
+              aria-haspopup="dialog"
+              aria-controls="settings-dialog"
+              ${ref(this._openBtnRef)}
+              @click=${this._onOpenSettings}
+            >
+              Settings
+            </button>
+          </div>
         </div>
         <time-dashboard-board .settings=${this._settings}></time-dashboard-board>
       </div>
@@ -183,6 +204,14 @@ export class TimeDashboardApp extends LitElement {
       </dialog>
     `;
   }
+
+  _onToggleMaximize = () => {
+    this._settings = {
+      ...this._settings,
+      maximized: !this._settings.maximized,
+    };
+    saveSettings(this._settings);
+  };
 
   _onOpenSettings = () => {
     this._settings = loadSettings();
