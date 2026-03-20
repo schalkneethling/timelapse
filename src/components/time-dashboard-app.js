@@ -36,20 +36,28 @@ export class TimeDashboardApp extends HTMLElement {
     /** @type {ReturnType<typeof loadSettings>} */
     this._settings = defaultSettings();
     this._timer = 0;
+    /** @type {AbortController | undefined} */
+    this._listenersAbort = undefined;
     this._zones = listTimeZones();
   }
 
   connectedCallback() {
+    this._listenersAbort = new AbortController();
+    const { signal } = this._listenersAbort;
+
     this._settings = loadSettings();
     this.renderStatic();
-    this.bindDrawer();
+    this.bindDrawer(signal);
     this.syncDrawerFromSettings();
     this.refresh();
     this._timer = window.setInterval(() => this.refresh(), 1000);
   }
 
   disconnectedCallback() {
+    this._listenersAbort?.abort();
+    this._listenersAbort = undefined;
     window.clearInterval(this._timer);
+    this._timer = 0;
   }
 
   renderStatic() {
@@ -117,7 +125,10 @@ export class TimeDashboardApp extends HTMLElement {
     return this.shadowRoot?.getElementById(id) ?? null;
   }
 
-  bindDrawer() {
+  /**
+   * @param {AbortSignal} signal
+   */
+  bindDrawer(signal) {
     const dialog = /** @type {HTMLDialogElement | null} */ (this.$id("settings-dialog"));
     const openBtn = /** @type {HTMLButtonElement | null} */ (this.$id("open-settings"));
     const saveBtn = /** @type {HTMLButtonElement | null} */ (this.$id("drawer-save"));
@@ -126,52 +137,86 @@ export class TimeDashboardApp extends HTMLElement {
     const tzFilter = /** @type {HTMLInputElement | null} */ (this.$id("tz-filter"));
     if (!dialog || !openBtn || !saveBtn || !cancelBtn || !tzSelect || !tzFilter) return;
 
-    openBtn.addEventListener("click", () => {
-      this._settings = loadSettings();
-      this.populateZoneSelect(tzFilter.value.trim());
-      this.syncDrawerFromSettings();
-      dialog.showModal();
-    });
+    const listenOpts = { signal };
 
-    dialog.addEventListener("close", () => {
-      openBtn.focus();
-    });
+    openBtn.addEventListener(
+      "click",
+      () => {
+        this._settings = loadSettings();
+        this.populateZoneSelect(tzFilter.value.trim());
+        this.syncDrawerFromSettings();
+        dialog.showModal();
+      },
+      listenOpts,
+    );
 
-    cancelBtn.addEventListener("click", () => {
-      this._settings = loadSettings();
-      this.syncDrawerFromSettings();
-      this.refresh();
-      dialog.close();
-    });
+    dialog.addEventListener(
+      "close",
+      () => {
+        openBtn.focus();
+      },
+      listenOpts,
+    );
 
-    saveBtn.addEventListener("click", () => {
-      this.readDrawerIntoSettings();
-      saveSettings(this._settings);
-      this.refresh();
-      dialog.close();
-    });
+    cancelBtn.addEventListener(
+      "click",
+      () => {
+        this._settings = loadSettings();
+        this.syncDrawerFromSettings();
+        this.refresh();
+        dialog.close();
+      },
+      listenOpts,
+    );
 
-    dialog.addEventListener("cancel", () => {
-      this._settings = loadSettings();
-      this.refresh();
-    });
+    saveBtn.addEventListener(
+      "click",
+      () => {
+        this.readDrawerIntoSettings();
+        saveSettings(this._settings);
+        this.refresh();
+        dialog.close();
+      },
+      listenOpts,
+    );
 
-    tzFilter.addEventListener("input", () => {
-      this.populateZoneSelect(tzFilter.value.trim());
-    });
+    dialog.addEventListener(
+      "cancel",
+      () => {
+        this._settings = loadSettings();
+        this.refresh();
+      },
+      listenOpts,
+    );
 
-    tzSelect.addEventListener("change", () => {
-      /* live preview while open */
-      this.readDrawerIntoSettings();
-      this.refresh();
-    });
+    tzFilter.addEventListener(
+      "input",
+      () => {
+        this.populateZoneSelect(tzFilter.value.trim());
+      },
+      listenOpts,
+    );
+
+    tzSelect.addEventListener(
+      "change",
+      () => {
+        /* live preview while open */
+        this.readDrawerIntoSettings();
+        this.refresh();
+      },
+      listenOpts,
+    );
 
     for (const k of WIDGET_KEYS) {
       const el = /** @type {HTMLInputElement | null} */ (this.$id(`w-${k}`));
-      el?.addEventListener("change", () => {
-        this.readDrawerIntoSettings();
-        this.refresh();
-      });
+      el?.addEventListener(
+        "change",
+        () => {
+          this.readDrawerIntoSettings();
+          this.refresh();
+        },
+        listenOpts,
+      );
     }
 
     this.populateZoneSelect("");
